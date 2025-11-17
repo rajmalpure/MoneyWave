@@ -9,13 +9,26 @@ import { errorHandler, notFound } from "./middleware/errorHandler.js";
 
 const app = express();
 
-const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173"].filter(
-  Boolean
-);
+const envOrigins = (
+  process.env.CLIENT_URLS || process.env.CLIENT_URL || ""
+)
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const defaultOrigins = ["http://localhost:5173"];
+
+const allowedOrigins = [...new Set([...envOrigins, ...defaultOrigins])];
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+      // allow requests with no origin like mobile apps or curl
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );

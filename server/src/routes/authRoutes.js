@@ -35,7 +35,7 @@ router.get("/profile", authenticate, getProfile);
 router.get("/register", (req, res) => {
   res.json({
     message:
-      "Money Manager API – submit a POST request to /auth/register with name, email, password.",
+      "Money Manager API - submit a POST request to /auth/register with name, email, password.",
   });
 });
 
