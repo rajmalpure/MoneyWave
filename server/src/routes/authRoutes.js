@@ -31,5 +31,20 @@ router.post(
 
 router.get("/profile", authenticate, getProfile);
 
+// Friendly GET responses for health checks / browsers
+router.get("/register", (req, res) => {
+  res.json({
+    message:
+      "Money Manager API – submit a POST request to /auth/register with name, email, password.",
+  });
+});
+
+router.get("/login", (req, res) => {
+  res.json({
+    message:
+      "Money Manager API – submit a POST request to /auth/login with email and password.",
+  });
+});
+
 export default router;
 
