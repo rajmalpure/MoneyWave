@@ -24,6 +24,12 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 
 app.get("/health", (req, res) => res.json({ status: "ok" }));
+app.get("/", (req, res) =>
+  res.json({
+    message: "Money Manager API is running",
+    docs: "Use /auth, /transactions, /analytics endpoints.",
+  })
+);
 
 app.use("/auth", authRoutes);
 app.use("/transactions", transactionRoutes);
