@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 const mobileLinks = [
   { to: "/dashboard", label: "Dashboard" },
   { to: "/transactions", label: "Transactions" },
+  { to: "/fixed-expenses", label: "Fixed Expenses" },
   { to: "/analytics", label: "Analytics" },
   { to: "/profile", label: "Profile" },
 ];
