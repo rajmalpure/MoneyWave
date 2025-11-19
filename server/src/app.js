@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoutes.js";
 import transactionRoutes from "./routes/transactionRoutes.js";
 import analyticsRoutes from "./routes/analyticsRoutes.js";
 import fixedExpenseRoutes from "./routes/fixedExpenseRoutes.js";
+import groupRoutes from "./routes/groupRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 
 const app = express();
@@ -46,7 +47,7 @@ app.get("/health", (req, res) => res.json({ status: "ok" }));
 app.get("/", (req, res) =>
   res.json({
     message: "Money Manager API is running",
-    docs: "Use /auth, /transactions, /analytics, /fixed-expenses endpoints.",
+    docs: "Use /auth, /transactions, /analytics, /fixed-expenses, /groups endpoints.",
   })
 );
 
@@ -55,6 +56,7 @@ app.use("/auth", authRoutes);
 app.use("/transactions", transactionRoutes);
 app.use("/analytics", analyticsRoutes);
 app.use("/fixed-expenses", fixedExpenseRoutes);
+app.use("/groups", groupRoutes);
 
 // Error handlers
 app.use(notFound);

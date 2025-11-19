@@ -6,6 +6,7 @@ const buildAuthResponse = (user) => {
   const payload = {
     id: user._id,
     name: user.name,
+    username: user.username,
     email: user.email,
   };
 
@@ -17,16 +18,22 @@ const buildAuthResponse = (user) => {
 
 export const register = async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, username, email, password } = req.body;
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
     if (existingUser) {
-      return res.status(409).json({ message: "Email already in use" });
+      if (existingUser.email === email) {
+        return res.status(409).json({ message: "Email already in use" });
+      }
+      if (existingUser.username === username.toLowerCase()) {
+        return res.status(409).json({ message: "Username already taken" });
+      }
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
       name,
+      username: username.toLowerCase(),
       email,
       password: hashedPassword,
     });

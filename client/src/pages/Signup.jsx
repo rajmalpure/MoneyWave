@@ -6,7 +6,7 @@ import { TextInput } from "../components/ui/TextInput";
 import { Button } from "../components/ui/Button";
 import { useAuthStore } from "../store/useAuthStore";
 
-const initialState = { name: "", email: "", password: "" };
+const initialState = { name: "", username: "", email: "", password: "" };
 
 export const Signup = () => {
   const [form, setForm] = useState(initialState);
@@ -44,6 +44,13 @@ export const Signup = () => {
           name="name"
           value={form.name}
           onChange={handleChange}
+        />
+        <TextInput
+          label="Username"
+          name="username"
+          value={form.username}
+          onChange={handleChange}
+          placeholder="Choose a unique username"
         />
         <TextInput
           label="Email"

@@ -1,12 +1,13 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/useAuthStore";
 import { Button } from "../ui/Button";
-import { LayoutDashboard, Receipt, TrendingUp, User, Wallet } from "lucide-react";
+import { LayoutDashboard, Receipt, TrendingUp, User, Wallet, Users } from "lucide-react";
 
 const links = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/transactions", label: "Transactions", icon: Receipt },
   { to: "/fixed-expenses", label: "Fixed Expenses", icon: Wallet },
+  { to: "/groups", label: "Group Transactions", icon: Users },
   { to: "/analytics", label: "Analytics", icon: TrendingUp },
   { to: "/profile", label: "Profile", icon: User },
 ];

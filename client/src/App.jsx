@@ -6,6 +6,10 @@ import { Signup } from "./pages/Signup";
 import { Dashboard } from "./pages/Dashboard";
 import { Transactions } from "./pages/Transactions";
 import { FixedExpenses } from "./pages/FixedExpenses";
+import { Groups } from "./pages/Groups";
+import { CreateGroup } from "./pages/CreateGroup";
+import { GroupDetails } from "./pages/GroupDetails";
+import { Invitations } from "./pages/Invitations";
 import { Analytics } from "./pages/Analytics";
 import { Profile } from "./pages/Profile";
 import { Landing } from "./pages/Landing";
@@ -25,6 +29,10 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/fixed-expenses" element={<FixedExpenses />} />
+            <Route path="/groups" element={<Groups />} />
+            <Route path="/groups/create" element={<CreateGroup />} />
+            <Route path="/groups/invitations" element={<Invitations />} />
+            <Route path="/groups/:id" element={<GroupDetails />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
