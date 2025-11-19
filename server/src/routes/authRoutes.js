@@ -49,7 +49,7 @@ router.get("/register", (req, res) => {
 router.get("/login", (req, res) => {
   res.json({
     message:
-      "Money Manager API – submit a POST request to /auth/login with email and password.",
+      "Money Manager API - submit a POST request to /auth/login with email and password.",
   });
 });
 
