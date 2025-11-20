@@ -22,6 +22,8 @@ const defaultOrigins = [
   "http://localhost:5173",
   "http://localhost:5000",
   "https://raj-money.vercel.app",
+  "https://raj-money.vercel.app/login",
+  "**","*"
 ];
 
 // Final allowed origins (merge and deduplicate)
