@@ -29,18 +29,38 @@ const allowedOrigins = [...new Set([...defaultOrigins, ...envOrigins])];
 
 console.log("Allowed Origins: ", allowedOrigins);
 
-// CORS configuration
+// CRITICAL: Manual CORS headers BEFORE other middleware
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  
+  // Allow requests from allowed origins or no origin (server-to-server)
+  if (!origin || allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin || "*");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  } else {
+    console.log("Blocked by CORS: ", origin);
+  }
+  
+  // Handle preflight OPTIONS requests
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+  
+  next();
+});
+
+// CORS middleware as backup
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
       if (!origin) return callback(null, true);
       
       if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        console.log("Blocked by CORS: ", origin);
-        callback(new Error(`Not allowed by CORS: ${origin}`));
+        callback(null, false);
       }
     },
     credentials: true,
